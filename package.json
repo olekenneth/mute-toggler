@@ -1,0 +1,23 @@
+{
+  "name": "mute-toggler",
+  "version": "1.0.0",
+  "description": "A local webserver to keep status of microphone mute state",
+  "main": "index.mjs",
+  "module": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:olekenneth/mute-toggler.git"
+  },
+  "author": "Ole-Kenneth Bratholt <ok@schibsted.com>",
+  "license": "GPL-3.0-or-later",
+  "keywords": [
+    "mute",
+    "google",
+    "meet",
+    "microphone"
+  ]
+}

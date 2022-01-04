@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mute/unmute</title>
+  </head>
+  <body>
+    <style>
+      :root {
+        --red: #dd0000;
+      }
+      html {
+        display: grid;
+        min-height: 100%;
+      }
+      body {
+        background: #f6f6f6;
+        font-family: Helvetica, sans-serif;
+        margin: auto;
+        text-align: center;
+      }
+      h1 {
+        font-size: 36px;
+        line-height: 40px;
+      }
+      a {
+        padding: 15px 20px;
+        font-size: 17px;
+        line-height: 20px;
+        appearance: button;
+        color: #ffffff;
+        background-color: var(--red);
+        text-decoration: none;
+        margin-bottom: 0;
+        font-weight: normal;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-radius: 9px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+      }
+      a:hover {
+        background-color: #ee0000;
+      }
+      a:active {
+        background-color: #aa0000;
+      }
+      a.unmute {
+        background-color: #aa0000;
+      }
+      a.mute:before {
+        content: "";
+        position: absolute;
+        border-top: 5px solid #000000;
+        width: 63px;
+        height: 52px;
+        margin: -13px 0 0 -10px;
+        transform: rotate(45deg);
+        transform-origin: 0% 0%;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #1c1c1e;
+          color: #fafaf7;
+        }
+      }
+    </style>
+
+    <div id="app">
+      <a href="/mute">Blæ </a>
+    </div>
+
+    <script type="text/javascript">
+      const button = document.querySelector("a");
+
+      const getState = (path) => {
+        return fetch(path)
+          .then((res) => res.json())
+          .then((state) => {
+            button.innerText = "🎤";
+            button.classList = state.muted ? "unmute" : "mute";
+            button.href = state.muted ? "/unmute" : "/mute";
+          });
+      };
+
+      const toggle = (event) => {
+        console.log(event);
+        event.preventDefault();
+        const path = event.currentTarget.href;
+        getState(path);
+        return false;
+      };
+
+      button.addEventListener("click", toggle, false);
+      getState("/state");
+    </script>
+  </body>
+</html>
